@@ -57,8 +57,6 @@ class LinkedList:
         currentNext = currentNext.next
         previous.next = currentNext.next
 
-        
-
     def length(self):
         count = 0
         currentNext = self.head
@@ -67,9 +65,6 @@ class LinkedList:
             currentNext = currentNext.next
         return count+1
     
-    
-
-
     def printList(self):
         currentNext = self.head
         while currentNext.next is not None:
@@ -78,15 +73,17 @@ class LinkedList:
         print(currentNext.value)
         
 
-root = LinkedList(10)
 
-root.append(1)
-print("length is ", root.length())
-root.append(5)
+if True:
+    root = LinkedList(10)
 
-root.append(15)
-root.insert(2, 4)
-root.printList()
-root.remove(4)
-print("length is ", root.length())
-root.printList()
+    root.append(1)
+    print("length is ", root.length())
+    root.append(5)
+
+    root.append(15)
+    root.insert(2, 4)
+    root.printList()
+    root.remove(4)
+    print("length is ", root.length())
+    root.printList()
