@@ -67,8 +67,76 @@ class BinarySearchTree:
                 return False
             
     def remove(self, value):
-        pass
+        ## atrod sevi un tad balancē
+        currentNode = self
+        previousNode = self
+        
+        
 
+        while True:
+            
+            if value > currentNode.value:
+                if currentNode.right != None:
+                    previousNode = currentNode
+                    currentNode = currentNode.right
+                else:
+                    return self
+
+            elif value < currentNode.value:
+                if currentNode.left != None:
+                    previousNode = currentNode
+                    currentNode = currentNode.left
+                else:
+                    return self
+            else:
+                newCurrentRoot = BinarySearchTree(value)
+                newCurrentRoot.left = currentNode.left
+                newCurrentRoot.right = currentNode.right
+
+                values = []
+
+                values = newCurrentRoot.getAllValues()
+                #print("nodeCount: ", len(values))
+                if len(values) == 1:
+                    if previousNode.value == currentNode.value:
+                        return BinarySearchTree(None)
+                    
+                    previousNode.value
+                    if value > previousNode.value:
+                        previousNode.right = None
+                    else:
+                        previousNode.left = None
+                    
+                    return self
+                
+
+                
+                values.remove(value)
+                
+
+
+                
+                values.sort()
+
+                valueCount = len(values)
+                middle = round(valueCount/2)
+            
+                newRoot = BinarySearchTree(values[middle])
+                values.pop(middle)
+                for i in range(valueCount-1):
+                    newRoot.insert(values[i])
+                    pass
+                
+                if previousNode.value != currentNode.value:
+                    if newRoot.value > previousNode.value:
+                        previousNode.right = newRoot
+                    else:
+                        previousNode.left = newRoot
+                else:        
+
+                    self = newRoot
+                return self
+        
     def getAllValues(self):
         array = []
         currentNode = self
@@ -85,7 +153,7 @@ def getBSTvalues(currentNode, array):
     if currentNode.left != None:
         array.append(currentNode.left.value)
         getBSTvalues(currentNode.left, array)
-
+    
     if currentNode.right != None:
         array.append(currentNode.right.value)
         getBSTvalues(currentNode.right, array)
@@ -102,3 +170,17 @@ if True:
     print(root.getAllValues())
     root.rebalance()
     print(root.getAllValues())
+
+
+    print()
+
+    root = root.remove(3)
+    root = root.remove(10)
+    root = root.remove(5)
+    root = root.remove(13)
+    root = root.remove(20)
+    
+    
+    print(root.value)
+    print(root.getAllValues())
+    #print(newRoot.getAllValues())
